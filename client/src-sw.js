@@ -24,19 +24,7 @@ warmStrategyCache({
   strategy: pageCache,
 });
 
-registerRoute(({ request }) => request.mode === 'navigate', pageCache),
-  new CatcheFirst({
-    cacheName: '',
-    plugins: [
-      new CacheableResponsePlugin({
-        statuses: [0, 200],
-      }),
-      new ExpirationPlugin({
-        maxEntries: 60,
-        maxAgeSeconds: 30 * 24 * 60 * 60,
-      }),
-    ],
-  });
+registerRoute(({ request }) => request.mode === 'navigate', pageCache);
 
 registerRoute(({ request }) => ['style', 'script', 'worker'].includes(request.destination),
   new StaleWhileRevalidate({
@@ -44,6 +32,10 @@ registerRoute(({ request }) => ['style', 'script', 'worker'].includes(request.de
     plugins: [
       new CacheableResponsePlugin({
         statuses: [0, 200],
+      }),
+      new ExpirationPlugin({
+        maxEntries: 60,
+        maxAgeSeconds: 30 * 24 * 60 * 60,
       }),
     ],
   }),
