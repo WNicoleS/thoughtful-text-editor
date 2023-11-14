@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const path = require('path');
 const { InjectManifest } = require('workbox-webpack-plugin');
@@ -33,10 +34,12 @@ module.exports = () => {
         icons: [
           {
             src: path.resolve("src/images/logo.png"),
+            sizes: [96, 128, 192, 256, 384, 512],
             destination: path.join("assets", "icons"),
           },
         ],
       }),
+      new MiniCssExtractPlugin(),
       new InjectManifest({
         swSrc: 'src/sw.js',
         swDest: 'src-sw.js',
@@ -59,7 +62,6 @@ module.exports = () => {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-env'],
-              sizes: [96, 128, 192, 256, 384, 512],
               plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime'],
             },
           },
