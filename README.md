@@ -22,13 +22,9 @@ This is a simple text editor.
 
 ## Usage
 
-Heroku: 
+Heroku: https://secret-mountain-52f68b4a3721.herokuapp.com/
 
 Run 'npm run start' to start up the application.
-
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ```
 
 ## Credits
 
